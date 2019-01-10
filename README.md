@@ -39,8 +39,8 @@ Call the Android  shutdown interface
 | androidReBoot       | Root                            | System signature required              |
 | androidLockScreen   | LockScreen                      |                                        |
 | androidUnlockScreen | UnLockScreen                    |                                        |
-| acquireWakeLock     | AcquireWakeLock                 |                                        |
-| releaseWakeLock     | ReleaseWakeLock                 |                                        |
+| acquireWakeLock     | AcquireWakeLock                 | Must be paired with releaseWakeLock    |
+| releaseWakeLock     | ReleaseWakeLock                 | Must be paired with acquireWakeLock    |
 | goToApp             | Jump application                | Need to add the package name parameter |
 | setpropSleep        | Sets the system sleep timeout   | Need to increase the time parameter    |
 | setPropLockScreen   | Sets the screen closing timeout | Need to increase the time parameter    |
