@@ -1,4 +1,4 @@
-<p align="right"><a href="<p align="right"><a href="https://github.com/PicoSupport/PicoSupport/blob/master/README_CN.md/" target="_blank">中文</a></p>" target="_blank">CallJar</a></p>
+<p align="right"><a href="https://github.com/PicoSupport/PicoSupport/wiki/Unity-Call-Jar--and-Export-Jar" target="_blank">Export</a></p>
 
 # PowerManager Instructions
 
