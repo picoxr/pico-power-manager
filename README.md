@@ -1,3 +1,5 @@
+<p align="right"><a href="<p align="right"><a href="https://github.com/PicoSupport/PicoSupport/blob/master/README_CN.md/" target="_blank">中文</a></p>" target="_blank">CallJar</a></p>
+
 # PowerManager Instructions
 
 1. Create a new Unity project and copy the picovrpowermanager_vxxx. jar package and res folder in the plugins-> Android in the Demo to the directory corresponding to the Unity project.
