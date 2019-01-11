@@ -21,7 +21,7 @@
    ```
    android:name="com.example.picovrpowermanager.PicoVRPowerManger"
    ```
-   ![](https://github.com/PicoSupport/PicoVRPowerManager/blob/master/01.png)
+  ![](https://github.com/PicoSupport/PicoVRPowerManager/blob/master/01.png)
 
 3.Copy the script of PicoUnityActivity. Cs in the Demo to any directory of Unity project.
 
