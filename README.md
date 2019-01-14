@@ -1,4 +1,4 @@
-<p align="right"><a href="https://github.com/PicoSupport/PicoSupport" target="_blank"> <img src="https://github.com/PicoSupport/PicoSupport/blob/master/Assets/home.png" alt = "PicoSupportHome" width="20"></img> </a></p>
+<p align="right"><a href="https://github.com/PicoSupport/PicoSupport" target="_blank"> <img alt = "PicoSupportHome" src="https://github.com/PicoSupport/PicoSupport/blob/master/Assets/home.png"  width="20"></img> </a></p>
 
 # PowerManager Instructions
 
