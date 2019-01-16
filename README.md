@@ -2,9 +2,7 @@
 
 Note: Regarding java package creation and usage, please refer to [the Guideline](https://github.com/PicoSupport/PicoSupport/blob/master/How_to_use_JAR_file_in_Unity_project_on_Pico_device.docx)
 
-1. Create a new Unity project and copy the picovrpowermanager_vxxx. jar package and res folder in the plugins-> Android in the Demo to the directory corresponding to the Unity project.
-
-2. Modify the androidminifests. XML file and Add: android: sharedUserId = "android. Uid. System"
+1. Modify the androidminifests. XML file and Add: android: sharedUserId = "android. Uid. System"
 
    Add Permission:
 
@@ -23,7 +21,7 @@ Note: Regarding java package creation and usage, please refer to [the Guideline]
    ```
   ![](https://github.com/PicoSupport/PicoVRPowerManager/blob/master/01.png)
 
-3.Copy the script of PicoUnityActivity. Cs in the Demo to any directory of Unity project.
+2.Copy the script of PicoUnityActivity. Cs in the Demo to any directory of Unity project.
 
 4.Call the Android interface For example:
 
