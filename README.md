@@ -2,7 +2,9 @@
 
 Note: Regarding java package creation and usage, please refer to [the Guideline](https://github.com/PicoSupport/PicoSupport/blob/master/How_to_use_JAR_file_in_Unity_project_on_Pico_device.docx)
 
-1. Modify the androidminifests. XML file and Add: android: sharedUserId = "android. Uid. System"
+## Modify AndroidManifest
+
+ Modify the androidminifests. XML file and Add: android: sharedUserId = "android. Uid. System"
 
    Add Permission:
 
@@ -14,14 +16,14 @@ Note: Regarding java package creation and usage, please refer to [the Guideline]
    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
    ```
 
-   Modify the mainactivity:
+## Class Name
 
    ```
    android:name="com.example.picovrpowermanager.PicoVRPowerManger"
    ```
   ![](https://github.com/PicoSupport/PicoVRPowerManager/blob/master/01.png)
 
-2.Call the Android interface For example:
+## Interface
 
 ```
 PicoUnityActivity.CallObjectMethod("androidShutDown");
@@ -47,4 +49,3 @@ Call the Android  shutdown interface
 
 Note:The second parameter in the silent installation must be the package name of the current application, not the package name of the installed application.
 
-5.**the Bundle Identifier of PlayerSetting in Unity should be consistent with the Android project.**
