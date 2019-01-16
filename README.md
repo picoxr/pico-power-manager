@@ -33,7 +33,7 @@ PicoUnityActivity.CallObjectMethod("androidShutDown");
 
 Call the Android  shutdown interface 
 
-**Interface Instructions**
+**Interface List**
 
 | Interface           | Instructions                    | Remark                                 |
 | ------------------- | ------------------------------- | -------------------------------------- |
