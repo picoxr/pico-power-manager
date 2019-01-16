@@ -21,9 +21,7 @@ Note: Regarding java package creation and usage, please refer to [the Guideline]
    ```
   ![](https://github.com/PicoSupport/PicoVRPowerManager/blob/master/01.png)
 
-2.Copy the script of PicoUnityActivity. Cs in the Demo to any directory of Unity project.
-
-4.Call the Android interface For example:
+2.Call the Android interface For example:
 
 ```
 PicoUnityActivity.CallObjectMethod("androidShutDown");
