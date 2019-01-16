@@ -21,7 +21,6 @@ Note: Regarding java package creation and usage, please refer to [the Guideline]
    ```
    android:name="com.example.picovrpowermanager.PicoVRPowerManger"
    ```
-  ![](https://github.com/PicoSupport/PicoVRPowerManager/blob/master/01.png)
 
 ## Interface
 
