@@ -247,7 +247,7 @@ public class PicoVRPowerManger extends UnityPlayerNativeActivityPico {
 	}
 	
 
-	/*// 静默实现安装
+	/*
 	public void silentInstall(final String apkPath) {
 		Log.i(TAG, "Enable silent installation，apkPath = " + apkPath);
 
