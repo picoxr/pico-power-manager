@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         componentName = new ComponentName(this, AdminReceiver.class);
     }
 
-    // 关机，必须签名
+   
     public void shutDownClick(View v) {
 
         Log.i(TAG, "shutDownClick");
@@ -85,29 +85,29 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    // 重启，必须签名
+    
     public void reBootClick(View v) {
 
         Log.i(TAG, "reBootClick");
         pm.reboot("");
     }
 
-    // 锁屏
+   
     public void lockScreenClick(View v) {
 
         Log.i(TAG, "androidLockScreen");
         if (policyManager.isAdminActive(componentName)) {
             Log.i(TAG, "lockNow");
-            policyManager.lockNow();// 锁屏
+            policyManager.lockNow();
 
         } else {
 
             Log.i(TAG, "activeManage");
-            activeManage(); // 获取权限
+            activeManage(); 
         }
     }
 
-    // 获取锁屏权限
+   
     private void activeManage() {
 
         Log.i(TAG, "activeManage()");
@@ -117,13 +117,13 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, MY_REQUEST_CODE);
     }
 
-    // 锁屏后，自动开屏实例
+   
     public void unlockScreenClick(View v) {
 
         Log.i(TAG, "unlockScreenClick");
         if (policyManager.isAdminActive(componentName)) {
             Log.i(TAG, "lockNow");
-            policyManager.lockNow();// 锁屏
+            policyManager.lockNow();
 
             Intent intent = new Intent(this, ScreenService.class);
             startService(intent);
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
 
             Log.i(TAG, "activeManage");
-            unlockActiveManage(); // 获取权限
+            unlockActiveManage(); 
         }
     }
 
@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "unlockActiveManage()");
         Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
         intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName);
-        intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, "激活后就能一键锁屏了");
+        intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, "Lock screen");
         startActivityForResult(intent, MY_REQUEST_UNLOCK_CODE);
     }
 
@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    // 请求系统锁，应用于子线程或者服务，必须与releaseWakeLock成对存在
+  
     public void acquireWakeLockClick(View v) {
 
         if (wakeLock == null) {
@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    // 释放系统锁，必须与acquireWakeLock成对存在
+   
     public void releaseWakeLockClick(View v) {
 
         if (wakeLock != null && wakeLock.isHeld()) {
@@ -181,65 +181,62 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // shell命令实现设置休眠时间：setprop persist.psensor.sleep.delay -1 表示系统永不休眠
+    
     public void setpropUnsleepClick(View v) {
 
         Log.e(TAG, "setpropUnsleepClick");
         try {
             execCommand(SLEEP_TIME + "-1");
-            Toast.makeText(this, "设置成功", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Succeed", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    // shell命令实现设置休眠时间：setprop persist.psensor.sleep.delay 15 表示系统15s后休眠
+   
     public void setpropSleepClick(View v) {
 
         Log.e(TAG, "setpropSleepClick");
         try {
             execCommand(SLEEP_TIME + 15);
-            Toast.makeText(this, "设置成功", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Succeed", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    // shell命令实现设置锁屏时间：setprop persist.psensor.screenoff.delay 65535 表示系统屏幕常亮
+   
     public void setpropUnlockScreenClick(View v) {
 
         Log.e(TAG, "setpropUnlockScreenClick");
         try {
             execCommand(LOCK_SCREEN + 65535);
-            Toast.makeText(this, "设置成功！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Succeed", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(this, "设置失败！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Failed！", Toast.LENGTH_SHORT).show();
         }
     }
 
-    // shell命令实现设置锁屏时间：setprop persist.psensor.screenoff.delay 10 表示系统屏幕10s后息屏
+  
     public void setpropLockScreenClick(View v) {
 
         Log.e(TAG, "setpropLockScreenClick");
         try {
             execCommand(LOCK_SCREEN + 10);
-            Toast.makeText(this, "设置成功！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Succeed！", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(this, "设置失败！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Failed！", Toast.LENGTH_SHORT).show();
         }
     }
 
-    // 发送shell命令的实现方法
+    
     public void execCommand(String command) throws IOException {
 
         Log.i(TAG, "command = " + command);
         Runtime runtime = Runtime.getRuntime();
-        Process proc = runtime.exec(command); // 这句话就是shell与高级语言间的调用
-        // 如果有参数的话可以用另外一个被重载的exec方法
-        // 实际上这样执行时启动了一个子进程,它没有父进程的控制台
-        // 也就看不到输出,所以我们需要用输出流来得到shell执行后的输出
+        Process proc = runtime.exec(command); 
         InputStream inputstream = proc.getInputStream();
         InputStreamReader inputstreamreader = new InputStreamReader(inputstream);
         BufferedReader bufferedreader = new BufferedReader(inputstreamreader);
@@ -250,9 +247,7 @@ public class MainActivity extends AppCompatActivity {
             sb.append("/n");
         }
         Log.e(TAG, sb.toString());
-        // 使用exec执行不会等执行成功以后才返回,它会立即返回
-        // 所以在某些情况下是很要命的(比如复制文件的时候)
-        // 使用wairFor()可以等待命令执行完成以后才返回
+        
         try {
             if (proc.waitFor() != 0) {
                 System.err.println("exit value = " + proc.exitValue());
@@ -262,11 +257,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // 静默安装
+   
     public void silentInstallClick(View v) {
 
         silentInstallapp(APK_PATH, ONESELF_NAME);
-        Log.e(TAG, "开启静默安装，APK_PATH = " + APK_PATH);
+        Log.e(TAG, "Enable silent installation，APK_PATH = " + APK_PATH);
 
     }
 
@@ -276,29 +271,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onException(Exception arg0) {
                 // TODO Auto-generated method stub
-                Log.e(TAG, "开启静默安装，onException");
+                Log.e(TAG, "Enable silent installation，onException");
             }
 
             @Override
             public void onError(String arg0) {
                 // TODO Auto-generated method stub
-                Log.e(TAG, "开启静默安装， onError");
+                Log.e(TAG, "Enable silent installation， onError");
             }
 
             @Override
             public void onComplete(String arg0) {
                 // TODO Auto-generated method stub
-                Log.e(TAG, "开启静默安装，onComplete");
+                Log.e(TAG, "Enable silent installation，onComplete");
             }
         });
     }
 
-    // 跳转到其他应用
+    // Intent other app
     public void openAPPClick(View v) {
         goToApp(PACKAGE_NAME);
     }
 
-    // 跳转到其他应用
+    // Intent other app
     private void goToApp(String packagename) {
 
         Intent intent = new Intent();
@@ -307,14 +302,14 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // 静默卸载
+   
     public void silentUninstallClick(View v) {
 
         silentUninstall(PACKAGE_NAME);
 
     }
 
-    // 静默卸载实现方式
+  
     private void silentUninstall(final String packageName) {
 
         new Thread() {
@@ -347,9 +342,9 @@ public class MainActivity extends AppCompatActivity {
         public void packageDeleted(String packageName, int returnCode) throws RemoteException {
 
             if (returnCode == 1) {
-                Log.i(TAG, "删除成功！ " + returnCode);
+                Log.i(TAG, "Succeed " + returnCode);
             } else {
-                Log.i(TAG, "删除失败！ " + returnCode);
+                Log.i(TAG, "Failed " + returnCode);
             }
         }
     }
