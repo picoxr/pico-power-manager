@@ -32,9 +32,7 @@ public class PicoVRPowerManger extends UnityPlayerNativeActivityPico {
 	private WakeLock wakeLock;
 	private PowerManager pm;
 	private static ExecutorService mInstaller = Executors.newFixedThreadPool(1);
-	/**
-	 * DevicePolicyManager 顾名思义，这个类的作用是管理设备。通过这个类，我们可以实现屏幕锁定、亮度调节甚至是恢复出厂设置等功能。
-	 */
+	
 	private static DevicePolicyManager policyManager;
 	private static ComponentName componentName;
 	private static final int MY_REQUEST_CODE = 9999;
@@ -51,10 +49,9 @@ public class PicoVRPowerManger extends UnityPlayerNativeActivityPico {
 
 		pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
 
-		// 获取设备管理服务
+		
 		policyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-		// ComponentName这个我们在用intent跳转的时候用到过。
-		// 自己的AdminReceiver 继承自 DeviceAdminReceiver
+		
 		componentName = new ComponentName(this, AdminReceiver.class);
 	}
 
@@ -89,14 +86,14 @@ public class PicoVRPowerManger extends UnityPlayerNativeActivityPico {
 
 	public void androidLockScreen() {
 		Log.i(TAG, "androidLockScreen");
-		// 判断是否有锁屏权限，若有则立即锁屏并结束自己，若没有则获取权限
+	
 		if (policyManager.isAdminActive(componentName)) {
 			Log.i(TAG, "lockNow");
-			policyManager.lockNow();// 锁屏
+			policyManager.lockNow();
 		} else {
 
 			Log.i(TAG, "activeManage");
-			activeManage(); // 获取权限
+			activeManage(); 
 		}
 	}
 
@@ -108,15 +105,9 @@ public class PicoVRPowerManger extends UnityPlayerNativeActivityPico {
 //		wakeLock.release();
 	}
 
-	/**
-	 * 获取锁，保持屏幕亮度。 Android中通过各种Lock锁对电源进行控制，需要注意的是加锁和解锁必须成对出现。
-	 * 一般使用:这个函数在Activity的
-	 * onResume中被调用。releaseWakeLock()方法则是释放该锁,在Activity的onPause中被调用。
-	 */
 	public void acquireWakeLock() {
 
-		// 通过PowerManager的newWakeLock((int flags, String tag)方法来生成WakeLock实例。
-		// int Flags指示要获取哪种WakeLock，不同的Lock对cpu、屏幕、键盘灯有不同影响。
+		
 		if (wakeLock == null) {
 			wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, this.getClass().getCanonicalName());
 			wakeLock.setReferenceCounted(false);
@@ -127,8 +118,7 @@ public class PicoVRPowerManger extends UnityPlayerNativeActivityPico {
 
 	public void acquireWakeLock(long timeout) {
 
-		// 通过PowerManager的newWakeLock((int flags, String tag)方法来生成WakeLock实例。
-		// int Flags指示要获取哪种WakeLock，不同的Lock对cpu、屏幕、键盘灯有不同影响。
+		
 		if (wakeLock == null) {
 			wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, this.getClass().getCanonicalName());
 			wakeLock.setReferenceCounted(false);
@@ -151,12 +141,12 @@ public class PicoVRPowerManger extends UnityPlayerNativeActivityPico {
 	private void activeManage() {
 
 		Log.i(TAG, "activeManage()");
-		// 启动设备管理(隐式Intent) - 在AndroidManifest.xml中设定相应过滤器
+		
 		Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
-		// 权限列表
+		
 		intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName);
-		// 描述(additional explanation) 在申请权限时出现的提示语句
-		intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, "激活后就能一键锁屏了");
+		
+		intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, "Lock screen");
 		startActivityForResult(intent, MY_REQUEST_CODE);
 	}
 
@@ -190,13 +180,7 @@ public class PicoVRPowerManger extends UnityPlayerNativeActivityPico {
 
 	}
 
-	/**
-	 * setprop persist.psensor.sleep.delay + time
-	 * 
-	 * @param time
-	 *            单位 s -1：永久
-	 * @return
-	 */
+	
 	public void setpropSleep(String time) {
 		Log.e(TAG, "setpropSleep:" + time);
 		try {
@@ -220,10 +204,7 @@ public class PicoVRPowerManger extends UnityPlayerNativeActivityPico {
 	public void execCommand(String command) throws IOException {
 
 		Runtime runtime = Runtime.getRuntime();
-		Process proc = runtime.exec(command); // 这句话就是shell与高级语言间的调用
-		// 如果有参数的话可以用另外一个被重载的exec方法
-		// 实际上这样执行时启动了一个子进程,它没有父进程的控制台
-		// 也就看不到输出,所以我们需要用输出流来得到shell执行后的输出
+		Process proc = runtime.exec(command);
 		InputStream inputstream = proc.getInputStream();
 		InputStreamReader inputstreamreader = new InputStreamReader(inputstream);
 		BufferedReader bufferedreader = new BufferedReader(inputstreamreader);
