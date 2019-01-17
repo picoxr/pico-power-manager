@@ -40,6 +40,7 @@ This JAR file is used to modify power settings
 | setPropLockScreen   | Sets the screen closing timeout | Need to increase the time parameter    |
 | silentInstall       | SilentInstall                   | System signature required              |
 | silentUninstall     | SilentUninstall                 | System signature required              |
+
 The second parameter in the silent installation must be the package name of the current application, not the package name of the installed application.
 
 ## Note
