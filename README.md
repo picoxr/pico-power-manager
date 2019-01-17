@@ -25,15 +25,7 @@ This JAR file is used to modify power settings
    android:name="com.example.picovrpowermanager.PicoVRPowerManger"
    ```
 
-## Interface
-
-```
-PicoUnityActivity.CallObjectMethod("androidShutDown");
-```
-
-Call the Android  shutdown interface 
-
-**Interface List**
+## Interface List**
 
 | Interface           | Instructions                    | Remark                                 |
 | ------------------- | ------------------------------- | -------------------------------------- |
