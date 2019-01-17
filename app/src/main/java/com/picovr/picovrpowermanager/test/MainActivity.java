@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "activeManage()");
         Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
         intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName);
-        intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, "激活后就能一键锁屏了");
+        intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, "Lock Screen");
         startActivityForResult(intent, MY_REQUEST_CODE);
     }
 
