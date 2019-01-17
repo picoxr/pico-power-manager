@@ -25,7 +25,7 @@ This JAR file is used to modify power settings
    android:name="com.example.picovrpowermanager.PicoVRPowerManger"
    ```
 
-## Interface List**
+## Interface List
 
 | Interface           | Instructions                    | Remark                                 |
 | ------------------- | ------------------------------- | -------------------------------------- |
