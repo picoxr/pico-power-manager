@@ -40,6 +40,9 @@ This JAR file is used to modify power settings
 | setPropLockScreen   | Sets the screen closing timeout | Need to increase the time parameter    |
 | silentInstall       | SilentInstall                   | System signature required              |
 | silentUninstall     | SilentUninstall                 | System signature required              |
+The second parameter in the silent installation must be the package name of the current application, not the package name of the installed application.
 
-Note:The second parameter in the silent installation must be the package name of the current application, not the package name of the installed application.
+## Note
+This demo requires system signature. About how to sign a apk, refer to this [Customize Launcher on Pico Device](https://github.com/picoxr/support/blob/master/Customize%20Launcher%20on%20Pico%20Device.docx?raw=true).
+
 
