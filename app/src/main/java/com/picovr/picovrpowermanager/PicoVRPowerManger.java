@@ -80,7 +80,7 @@ public class PicoVRPowerManger extends UnityPlayerNativeActivityPico {
 
 		Log.i(TAG, "androidReBoot");
 		// PowerManager pManager = (PowerManager)
-		// getSystemService(Context.POWER_SERVICE); // 重启到fastboot模式
+		// getSystemService(Context.POWER_SERVICE); 
 		pm.reboot("");
 	}
 
@@ -135,9 +135,7 @@ public class PicoVRPowerManger extends UnityPlayerNativeActivityPico {
 		}
 	}
 
-	/**
-	 * 获取权限
-	 */
+	
 	private void activeManage() {
 
 		Log.i(TAG, "activeManage()");
@@ -215,9 +213,7 @@ public class PicoVRPowerManger extends UnityPlayerNativeActivityPico {
 			sb.append("/n");
 		}
 		Log.e(TAG, sb.toString());
-		// 使用exec执行不会等执行成功以后才返回,它会立即返回
-		// 所以在某些情况下是很要命的(比如复制文件的时候)
-		// 使用wairFor()可以等待命令执行完成以后才返回
+		
 		try {
 			if (proc.waitFor() != 0) {
 				System.err.println("exit value = " + proc.exitValue());
@@ -233,19 +229,19 @@ public class PicoVRPowerManger extends UnityPlayerNativeActivityPico {
 			@Override
 			public void onException(Exception arg0) {
 				// TODO Auto-generated method stub
-				Log.e(TAG, "开启静默安装，onException");
+				Log.e(TAG, "Enable silent installation，onException");
 			}
 			
 			@Override
 			public void onError(String arg0) {
 				// TODO Auto-generated method stub
-				Log.e(TAG, "开启静默安装， onError");
+				Log.e(TAG, "Enable silent installation， onError");
 			}
 			
 			@Override
 			public void onComplete(String arg0) {
 				// TODO Auto-generated method stub
-				Log.e(TAG, "开启静默安装，onComplete");
+				Log.e(TAG, "Enable silent installation，onComplete");
 			}
 		});
 	}
@@ -253,7 +249,7 @@ public class PicoVRPowerManger extends UnityPlayerNativeActivityPico {
 
 	/*// 静默实现安装
 	public void silentInstall(final String apkPath) {
-		Log.i(TAG, "开启静默安装，apkPath = " + apkPath);
+		Log.i(TAG, "Enable silent installation，apkPath = " + apkPath);
 
 		mInstaller.execute(new Runnable() {
 			@Override
@@ -303,7 +299,7 @@ public class PicoVRPowerManger extends UnityPlayerNativeActivityPico {
 		});
 	}
 */
-	// 静默卸载实现方式
+	
 	public void silentUninstall(final String packageName) {
 
 		new Thread() {
@@ -334,9 +330,9 @@ public class PicoVRPowerManger extends UnityPlayerNativeActivityPico {
 		public void packageDeleted(String packageName, int returnCode) throws RemoteException {
 
 			if (returnCode == 1) {
-				Log.i(TAG, "删除成功！ " + returnCode);
+				Log.i(TAG, "Succeed " + returnCode);
 			} else {
-				Log.i(TAG, "删除失败！ " + returnCode);
+				Log.i(TAG, "Failed " + returnCode);
 			}
 		}
 	}
