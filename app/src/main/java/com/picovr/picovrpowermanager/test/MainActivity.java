@@ -310,29 +310,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
   
-    private void silentUninstall(final String packageName) {
-
-        new Thread() {
-            public void run() {
-                PackageManager pm = mContext.getPackageManager();
-                IPackageDeleteObserver observer = new MyPackageDeleteObserver();
-//				pm.deletePackage(packageName, observer, 0);
-                Class c = null;
-                try {
-                    c = Class.forName("android.content.pm.PackageManager");
-                    Method m = c.getMethod("deletePackage", new Class[]{String.class, Object.class});
-                    Object o = m.invoke(null, new Object[]{packageName, observer});
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                } catch (NoSuchMethodException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.start();
+    public void silentUninstallClick(View v) {
+        PackageManager pm = mContext.getPackageManager();
+        Class<?>[] uninstalltypes = new Class[] {String.class, IPackageDeleteObserver.class, int.class};
+        Method uninstallmethod = null;
+//        silentUninstall(PACKAGE_NAME);
+        try {
+            uninstallmethod = pm.getClass().getMethod("deletePackage", uninstalltypes);
+            uninstallmethod.invoke(pm, new Object[] {PACKAGE_NAME, new MyPackageDeleteObserver(), 0});
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
     }
 
 
