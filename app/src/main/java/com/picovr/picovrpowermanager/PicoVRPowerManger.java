@@ -300,28 +300,20 @@ public class PicoVRPowerManger extends UnityPlayerNativeActivityPico {
 	}
 */
 	
-	public void silentUninstall(final String packageName) {
-
-		new Thread() {
-			public void run() {
-				PackageManager pm = unityActivity.getPackageManager();
-				IPackageDeleteObserver observer = new MyPackageDeleteObserver();
-				Class c = null;
-				try {
-					c = Class.forName("android.content.pm.PackageManager");
-					Method m = c.getMethod("deletePackage", new Class[]{String.class, Object.class});
-					Object o = m.invoke(null, new Object[]{packageName, observer});
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				} catch (NoSuchMethodException e) {
-					e.printStackTrace();
-				} catch (InvocationTargetException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			};
-		}.start();
+	public void silentUninstall(String pkgName) {
+		PackageManager pm = unityActivity.getPackageManager();
+		Class<?>[] uninstalltypes = new Class[] {String.class, IPackageDeleteObserver.class, int.class};
+		Method uninstallmethod = null;
+		try {
+			uninstallmethod = pm.getClass().getMethod("deletePackage", uninstalltypes);
+			uninstallmethod.invoke(pm, new Object[] {pkgName, new MyPackageDeleteObserver(), 0});
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		}
 	}
 
 	class MyPackageDeleteObserver extends IPackageDeleteObserver.Stub {
