@@ -11,19 +11,19 @@ This demo is used to modify power settings.(Check )
 
 ## API defined in JAR file
 
-| Interface           | Instructions                    | Remark                                 |
-| ------------------- | ------------------------------- | -------------------------------------- |
-| androidShutDown     | Shutdown                        | System signature required              |
-| androidReBoot       | Root                            | System signature required              |
-| androidLockScreen   | LockScreen                      |                                        |
-| androidUnlockScreen | UnLockScreen                    |                                        |
-| acquireWakeLock     | AcquireWakeLock                 | Must be paired with releaseWakeLock    |
-| releaseWakeLock     | ReleaseWakeLock                 | Must be paired with acquireWakeLock    |
-| goToApp             | Jump application                | Need to add the package name parameter |
-| setpropSleep        | Sets the system sleep timeout   | Need to increase the time parameter    |
-| setPropLockScreen   | Sets the screen closing timeout | Need to increase the time parameter    |
-| silentInstall       | SilentInstall                   | System signature required              |
-| silentUninstall     | SilentUninstall                 | System signature required              |
+| Interface           | Instructions                    | Remark                                                              |
+| ------------------- | ------------------------------- | --------------------------------------------------------------------|
+| androidShutDown     | Shutdown                        | System signature required                                           |
+| androidReBoot       | Root                            | System signature required                                           |
+| androidLockScreen   | LockScreen                      |                                                                     |
+| androidUnlockScreen | UnLockScreen                    |                                                                     |
+| acquireWakeLock     | AcquireWakeLock                 | Must be paired with releaseWakeLock                                 |
+| releaseWakeLock     | ReleaseWakeLock                 | Must be paired with acquireWakeLock                                 |
+| goToApp             | Jump application                | Need to add the package name parameter                              |
+| setpropSleep        | Sets the system sleep timeout   | Need to add the time parameter ("-1" means never sleep)             |
+| setPropLockScreen   | Sets the screen closing timeout | Need to add the time parameter ("65535" means never screen off      |
+| silentInstall       | SilentInstall                   | System signature required                                           |
+| silentUninstall     | SilentUninstall                 | System signature required                                           |
 
 The second parameter in the silent installation must be the package name of the current application, not the package name of the installed application.
 
