@@ -1,4 +1,4 @@
-package com.picovr.picovrpowermanager.test;
+package com.picovr.picovrpowermanager;
 
 public interface OnPackagedObserver {
 

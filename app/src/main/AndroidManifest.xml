@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.picovr.picovrpowermanager"
-    android:sharedUserId="android.uid.system">
+    android:sharedUserId="android.uid.system"
+    tools:ignore="ProtectedPermissions">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.DEVICE_POWER" />
+    <uses-permission android:name="android.permission.DEVICE_POWER"/>
     <uses-permission android:name="android.permission.SHUTDOWN" />
-    <uses-permission android:name="android.permission.REBOOT" />
+    <uses-permission android:name="android.permission.REBOOT"/>
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.INSTALL_PACKAGES" />
@@ -19,7 +21,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".test.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,7 +41,7 @@
             </intent-filter>
         </receiver>
 
-        <service android:name=".test.ScreenService" />
+        <service android:name="ScreenService" />
     </application>
 
 </manifest>

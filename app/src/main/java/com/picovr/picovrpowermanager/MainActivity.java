@@ -1,4 +1,4 @@
-package com.picovr.picovrpowermanager.test;
+package com.picovr.picovrpowermanager;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,11 +26,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.picovr.picovrpowermanager.AdminReceiver;
-import com.picovr.picovrpowermanager.R;
-import com.picovr.picovrpowermanager.ShellCmd;
-import com.picovr.picovrpowermanager.SilentInstaller;
-
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
@@ -44,11 +39,11 @@ public class MainActivity extends AppCompatActivity {
     private static ComponentName componentName;
     private static ExecutorService mInstaller = Executors.newFixedThreadPool(2);
 
-    private static final String PACKAGE_NAME = "com.example.picovr.test";
+    private static final String PACKAGE_NAME = "com.picovr.myapplication";
     private static final String SLEEP_TIME = "setprop persist.psensor.sleep.delay ";
     private static final String LOCK_SCREEN = "setprop persist.psensor.screenoff.delay ";
-    private static final String APK_PATH = "/storage/emulated/0/Download/PicoVRtest.apk";
-    private static final String ONESELF_NAME = "com.example.picovrpowermanager";
+    private static final String APK_PATH = "/storage/emulated/0/Download/myapplication.apk";
+    private static final String ONESELF_NAME = "com.picovr.picovrpowermanager";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
 
     
     public void reBootClick(View v) {
-
         Log.i(TAG, "reBootClick");
         pm.reboot("");
     }
@@ -124,12 +118,9 @@ public class MainActivity extends AppCompatActivity {
         if (policyManager.isAdminActive(componentName)) {
             Log.i(TAG, "lockNow");
             policyManager.lockNow();
-
             Intent intent = new Intent(this, ScreenService.class);
             startService(intent);
-
         } else {
-
             Log.i(TAG, "activeManage");
             unlockActiveManage(); 
         }
@@ -161,14 +152,12 @@ public class MainActivity extends AppCompatActivity {
 
   
     public void acquireWakeLockClick(View v) {
-
         if (wakeLock == null) {
-            wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, this.getClass().getCanonicalName());
+            wakeLock = this.pm.newWakeLock(PowerManager.FULL_WAKE_LOCK, this.getClass().getCanonicalName());
             wakeLock.setReferenceCounted(false);
             wakeLock.acquire();
             Log.i(TAG, "acquireWakeLockClick");
         }
-
     }
 
    
@@ -306,7 +295,6 @@ public class MainActivity extends AppCompatActivity {
         PackageManager pm = mContext.getPackageManager();
         Class<?>[] uninstalltypes = new Class[] {String.class, IPackageDeleteObserver.class, int.class};
         Method uninstallmethod = null;
-//        silentUninstall(PACKAGE_NAME);
         try {
             uninstallmethod = pm.getClass().getMethod("deletePackage", uninstalltypes);
             uninstallmethod.invoke(pm, new Object[] {PACKAGE_NAME, new MyPackageDeleteObserver(), 0});

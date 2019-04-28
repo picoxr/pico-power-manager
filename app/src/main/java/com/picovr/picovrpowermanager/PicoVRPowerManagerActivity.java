@@ -24,7 +24,7 @@ import android.os.PowerManager.WakeLock;
 import android.os.RemoteException;
 import android.util.Log;
 
-public class PicoVRPowerManger extends UnityPlayerNativeActivityPico {
+public class PicoVRPowerManagerActivity extends UnityPlayerNativeActivityPico {
 
 	public static Activity unityActivity = null;
 
@@ -49,7 +49,6 @@ public class PicoVRPowerManger extends UnityPlayerNativeActivityPico {
 
 		pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
 
-		
 		policyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
 		
 		componentName = new ComponentName(this, AdminReceiver.class);
@@ -99,10 +98,10 @@ public class PicoVRPowerManger extends UnityPlayerNativeActivityPico {
 
 	public void androidUnlockScreen() {
 
-//		Log.e(TAG, "androidUnlockScreen");
-//		wakeLock = pm.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.SCREEN_DIM_WAKE_LOCK, "My Tag");
-//		wakeLock.acquire();
-//		wakeLock.release();
+		Log.e(TAG, "androidUnlockScreen");
+		wakeLock = pm.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.SCREEN_DIM_WAKE_LOCK, "My Tag:");
+		wakeLock.acquire();
+		wakeLock.release();
 	}
 
 	public void acquireWakeLock() {
@@ -137,7 +136,6 @@ public class PicoVRPowerManger extends UnityPlayerNativeActivityPico {
 
 	
 	private void activeManage() {
-
 		Log.i(TAG, "activeManage()");
 		
 		Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
@@ -168,7 +166,6 @@ public class PicoVRPowerManger extends UnityPlayerNativeActivityPico {
 	}
 
 	public void goToActivity(String packagename, String activityname) {
-
 		Intent intent;
 		PackageManager packageManager = getPackageManager();
 		intent = packageManager.getLaunchIntentForPackage(packagename);
@@ -245,61 +242,7 @@ public class PicoVRPowerManger extends UnityPlayerNativeActivityPico {
 			}
 		});
 	}
-	
 
-	/*
-	public void silentInstall(final String apkPath) {
-		Log.i(TAG, "Enable silent installation，apkPath = " + apkPath);
-
-		mInstaller.execute(new Runnable() {
-			@Override
-			public synchronized void run() {
-				String[] args = { "pm", "install", "-r", apkPath };
-				String result = "";
-				ProcessBuilder processBuilder = new ProcessBuilder(args);
-				Process process = null;
-				InputStream errIs = null;
-				InputStream inIs = null;
-				try {
-					ByteArrayOutputStream baos = new ByteArrayOutputStream();
-					int read = -1;
-					process = processBuilder.start();
-					errIs = process.getErrorStream();
-					while ((read = errIs.read()) != -1) {
-						baos.write(read);
-					}
-					baos.write('\n');
-					inIs = process.getInputStream();
-					while ((read = inIs.read()) != -1) {
-						baos.write(read);
-					}
-					byte[] data = baos.toByteArray();
-					result = new String(data);
-					Log.i(TAG, "silentInstall result is : " + result);
-				} catch (IOException e) {
-					e.printStackTrace();
-				} catch (Exception e) {
-					e.printStackTrace();
-				} finally {
-					try {
-						if (errIs != null) {
-							errIs.close();
-						}
-						if (inIs != null) {
-							inIs.close();
-						}
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					if (process != null) {
-						process.destroy();
-					}
-				}
-			}
-		});
-	}
-*/
-	
 	public void silentUninstall(String pkgName) {
 		PackageManager pm = unityActivity.getPackageManager();
 		Class<?>[] uninstalltypes = new Class[] {String.class, IPackageDeleteObserver.class, int.class};
@@ -320,7 +263,6 @@ public class PicoVRPowerManger extends UnityPlayerNativeActivityPico {
 
 		@Override
 		public void packageDeleted(String packageName, int returnCode) throws RemoteException {
-
 			if (returnCode == 1) {
 				Log.i(TAG, "Succeed " + returnCode);
 			} else {
