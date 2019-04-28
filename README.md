@@ -1,31 +1,15 @@
 # PowerManager 
 
-Note: Regarding JAR file creation and usage, please refer to [the Guideline](https://github.com/picoxr/support/blob/master/How%20to%20Use%20JAR%20file%20in%20Unity%20project%20on%20Pico%20device.docx)
+JAR, Demo APK and PicoUnityActivity.cs are in /resource.
+**Note**: If you want to create your own JAR file, please refer to [the Guideline](https://github.com/picoxr/support/blob/master/How%20to%20Use%20JAR%20file%20in%20Unity%20project%20on%20Pico%20device.docx)      
+
+## Supported Devices
+Pico Goblin, Pico Neo, Pico G2, Pico G2 4K 
 
 ## Introduction
-This JAR file is used to modify power settings
+This demo is used to modify power settings.(Check )
 
-## Modify AndroidManifest
-
- Modify the androidminifests. XML file and Add: android: sharedUserId = "android. Uid. System"
-
-   Add Permission:
-
-   ```
-   <uses-permission android:name="android.permission.WAKE_LOCK" />
-   <uses-permission android:name="android.permission.DEVICE_POWER" />
-   <uses-permission android:name="android.permission.SHUTDOWN" />
-   <uses-permission android:name="android.permission.REBOOT" />
-   <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
-   ```
-
-## Class Name
-
-   ```
-   android:name="com.example.picovrpowermanager.PicoVRPowerManger"
-   ```
-
-## Interface List
+## API defined in JAR file
 
 | Interface           | Instructions                    | Remark                                 |
 | ------------------- | ------------------------------- | -------------------------------------- |
