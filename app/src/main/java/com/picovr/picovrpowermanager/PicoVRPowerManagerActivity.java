@@ -1,6 +1,7 @@
 package com.picovr.picovrpowermanager;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -158,10 +159,15 @@ public class PicoVRPowerManagerActivity extends UnityPlayerNativeActivityPico {
 
 	public void goToApp(String packagename) {
 
-		Intent intent = new Intent();
-		PackageManager packageManager = getPackageManager();
-		intent = packageManager.getLaunchIntentForPackage(packagename);
-		startActivity(intent);
+		if (getPackageManager().getLaunchIntentForPackage(packagename) != null) {
+			Intent intent = new Intent();
+			PackageManager packageManager = getPackageManager();
+			intent = packageManager.getLaunchIntentForPackage(packagename);
+			startActivity(intent);
+		} else {
+			Log.e(TAG, "goToApp: " + "The specific package doesn't exist!" );
+		}
+
 
 	}
 
@@ -221,42 +227,50 @@ public class PicoVRPowerManagerActivity extends UnityPlayerNativeActivityPico {
 	}
 	
 	public void silentInstall(String apkPath, String installerPkgName){
-		SilentInstaller.install(apkPath, installerPkgName, new ShellCmd.ICmdResultCallback() {
-			
-			@Override
-			public void onException(Exception arg0) {
-				// TODO Auto-generated method stub
-				Log.e(TAG, "Enable silent installation，onException");
-			}
-			
-			@Override
-			public void onError(String arg0) {
-				// TODO Auto-generated method stub
-				Log.e(TAG, "Enable silent installation， onError");
-			}
-			
-			@Override
-			public void onComplete(String arg0) {
-				// TODO Auto-generated method stub
-				Log.e(TAG, "Enable silent installation，onComplete");
-			}
-		});
+		File file = new File(apkPath);
+		if (file.exists()) {
+			SilentInstaller.install(apkPath, installerPkgName, new ShellCmd.ICmdResultCallback() {
+				@Override
+				public void onException(Exception arg0) {
+					// TODO Auto-generated method stub
+					Log.e(TAG, "Enable silent installation，onException");
+				}
+				@Override
+				public void onError(String arg0) {
+					// TODO Auto-generated method stub
+					Log.e(TAG, "Enable silent installation， onError");
+				}
+				@Override
+				public void onComplete(String arg0) {
+					// TODO Auto-generated method stub
+					Log.e(TAG, "Enable silent installation，onComplete");
+				}
+			});
+		} else {
+			Log.e(TAG, "silentInstall: " + "apk file doesn't exist!" );
+		}
+
 	}
 
 	public void silentUninstall(String pkgName) {
-		PackageManager pm = unityActivity.getPackageManager();
-		Class<?>[] uninstalltypes = new Class[] {String.class, IPackageDeleteObserver.class, int.class};
-		Method uninstallmethod = null;
-		try {
-			uninstallmethod = pm.getClass().getMethod("deletePackage", uninstalltypes);
-			uninstallmethod.invoke(pm, new Object[] {pkgName, new MyPackageDeleteObserver(), 0});
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
+		if (getPackageManager().getLaunchIntentForPackage(pkgName) != null) {
+			PackageManager pm = unityActivity.getPackageManager();
+			Class<?>[] uninstalltypes = new Class[] {String.class, IPackageDeleteObserver.class, int.class};
+			Method uninstallmethod = null;
+			try {
+				uninstallmethod = pm.getClass().getMethod("deletePackage", uninstalltypes);
+				uninstallmethod.invoke(pm, new Object[] {pkgName, new MyPackageDeleteObserver(), 0});
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				e.printStackTrace();
+			} catch (NoSuchMethodException e) {
+				e.printStackTrace();
+			}
+		} else {
+			Log.e(TAG, "silentUninstall: " + "The specific package doesn't exist!" );
 		}
+
 	}
 
 	class MyPackageDeleteObserver extends IPackageDeleteObserver.Stub {

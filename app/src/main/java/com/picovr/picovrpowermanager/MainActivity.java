@@ -1,6 +1,7 @@
 package com.picovr.picovrpowermanager;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -10,9 +11,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.IPackageDeleteObserver;
 import android.content.pm.PackageManager;
@@ -39,10 +42,10 @@ public class MainActivity extends AppCompatActivity {
     private static ComponentName componentName;
     private static ExecutorService mInstaller = Executors.newFixedThreadPool(2);
 
-    private static final String PACKAGE_NAME = "com.picovr.myapplication";
+    private static final String PACKAGE_NAME = "com.picovr.testapk";
     private static final String SLEEP_TIME = "setprop persist.psensor.sleep.delay ";
     private static final String LOCK_SCREEN = "setprop persist.psensor.screenoff.delay ";
-    private static final String APK_PATH = "/storage/emulated/0/Download/myapplication.apk";
+    private static final String APK_PATH = "/storage/emulated/0/Download/test.apk";
     private static final String ONESELF_NAME = "com.picovr.picovrpowermanager";
 
     @Override
@@ -248,8 +251,20 @@ public class MainActivity extends AppCompatActivity {
 
    
     public void silentInstallClick(View v) {
+        File file = new File(APK_PATH);
+        if (file.exists()) {
+            silentInstallapp(APK_PATH, ONESELF_NAME);
+        } else {
+            new AlertDialog.Builder(this).setMessage("The apk file doesn't exist!")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create().show();
+        }
 
-        silentInstallapp(APK_PATH, ONESELF_NAME);
         Log.e(TAG, "Enable silent installation，APK_PATH = " + APK_PATH);
 
     }
@@ -284,27 +299,49 @@ public class MainActivity extends AppCompatActivity {
 
     // Intent other app
     private void goToApp(String packagename) {
+        if (getPackageManager().getLaunchIntentForPackage(packagename) != null) {
+            Intent intent = new Intent();
+            PackageManager packageManager = mContext.getPackageManager();
+            intent = packageManager.getLaunchIntentForPackage(packagename);
+            startActivity(intent);
+        } else {
+            new AlertDialog.Builder(this).setMessage("The specific package doesn't exist!")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    }).create().show();
+        }
 
-        Intent intent = new Intent();
-        PackageManager packageManager = mContext.getPackageManager();
-        intent = packageManager.getLaunchIntentForPackage(packagename);
-        startActivity(intent);
     }
     
     public void silentUninstallClick(View v) {
-        PackageManager pm = mContext.getPackageManager();
-        Class<?>[] uninstalltypes = new Class[] {String.class, IPackageDeleteObserver.class, int.class};
-        Method uninstallmethod = null;
-        try {
-            uninstallmethod = pm.getClass().getMethod("deletePackage", uninstalltypes);
-            uninstallmethod.invoke(pm, new Object[] {PACKAGE_NAME, new MyPackageDeleteObserver(), 0});
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
+        if (getPackageManager().getLaunchIntentForPackage(PACKAGE_NAME) != null) {
+            PackageManager pm = mContext.getPackageManager();
+            Class<?>[] uninstalltypes = new Class[] {String.class, IPackageDeleteObserver.class, int.class};
+            Method uninstallmethod = null;
+            try {
+                uninstallmethod = pm.getClass().getMethod("deletePackage", uninstalltypes);
+                uninstallmethod.invoke(pm, new Object[] {PACKAGE_NAME, new MyPackageDeleteObserver(), 0});
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+        } else {
+            new AlertDialog.Builder(this).setMessage("The specific package doesn't exist!")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create().show();
         }
+
     }
 
 
