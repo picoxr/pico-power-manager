@@ -3,7 +3,8 @@ JAR, Demo APK and PicoUnityActivity.cs are in /resource.
 Note: If you want to create your own JAR file, please refer to [the Guideline](https://github.com/picoxr/support/blob/master/How%20to%20Use%20JAR%20file%20in%20Unity%20project%20on%20Pico%20device.docx)
 
 ## APK usage
-You need to place the test.apk in download directory for testing "silentInstall", "goToApp", "silentUninstall" APIs.
+You need to place the test.apk in download directory for testing "silentInstall".   
+After installing it, you can test "goToActivity", "goToApp", "silentUninstall" APIs.
 
 ## Introduction
 This JAR file is used to modify power settings
