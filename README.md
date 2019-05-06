@@ -7,7 +7,7 @@ You need to place the test.apk in download directory for testing "silentInstall"
 After installing it, you can test "goToActivity", "goToApp", "silentUninstall" APIs.
 
 ## Introduction
-This JAR file is used to modify power settings
+This JAR file is used to modify system-level settings
 
 ## Modify AndroidManifest
 
