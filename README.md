@@ -52,6 +52,6 @@ This JAR file is used to modify power settings
 The second parameter in the silent installation must be the package name of the current application, not the package name of the installed application.
 
 ## Note
-<a href="http://static.appstore.picovr.com/docs/KioskMode/chapter_four.html" target="_blank">KioskMode[4]</a>
+[KioskMode[4]]（http://static.appstore.picovr.com/docs/KioskMode/chapter_four.html?_blank)
 
 
