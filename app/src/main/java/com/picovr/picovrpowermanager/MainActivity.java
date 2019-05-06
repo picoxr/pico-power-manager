@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private static ExecutorService mInstaller = Executors.newFixedThreadPool(2);
 
     private static final String PACKAGE_NAME = "com.picovr.testapk";
+    private static final String ACTIVITY_NAME = "com.picovr.testapk.MainActivity";
     private static final String SLEEP_TIME = "setprop persist.psensor.sleep.delay ";
     private static final String LOCK_SCREEN = "setprop persist.psensor.screenoff.delay ";
     private static final String APK_PATH = "/storage/emulated/0/Download/test.apk";
@@ -264,7 +265,6 @@ public class MainActivity extends AppCompatActivity {
                     })
                     .create().show();
         }
-
         Log.e(TAG, "Enable silent installation，APK_PATH = " + APK_PATH);
 
     }
@@ -303,6 +303,28 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent();
             PackageManager packageManager = mContext.getPackageManager();
             intent = packageManager.getLaunchIntentForPackage(packagename);
+            startActivity(intent);
+        } else {
+            new AlertDialog.Builder(this).setMessage("The specific package doesn't exist!")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    }).create().show();
+        }
+
+    }
+
+    public void openActivityClick(View view) {
+        goToActivity(PACKAGE_NAME, ACTIVITY_NAME);
+    }
+
+    public void goToActivity(String packagename, String activityname) {
+        if (getPackageManager().getLaunchIntentForPackage(packagename) != null) {
+            Intent intent = new Intent();
+            ComponentName comp = new ComponentName(packagename, activityname);
+            intent.setComponent(comp);
             startActivity(intent);
         } else {
             new AlertDialog.Builder(this).setMessage("The specific package doesn't exist!")

@@ -172,12 +172,14 @@ public class PicoVRPowerManagerActivity extends UnityPlayerNativeActivityPico {
 	}
 
 	public void goToActivity(String packagename, String activityname) {
-		Intent intent;
-		PackageManager packageManager = getPackageManager();
-		intent = packageManager.getLaunchIntentForPackage(packagename);
-		ComponentName comp = new ComponentName(packagename, activityname);
-		intent.setComponent(comp);
-		startActivity(intent);
+		if (getPackageManager().getLaunchIntentForPackage(packagename) != null) {
+			Intent intent = new Intent();
+			ComponentName comp = new ComponentName(packagename, activityname);
+			intent.setComponent(comp);
+			startActivity(intent);
+		} else {
+			Log.e(TAG, "goToApp: " + "The specific package doesn't exist!" );
+		}
 
 	}
 

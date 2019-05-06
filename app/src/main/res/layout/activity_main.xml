@@ -113,7 +113,14 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:onClick="openAPPClick"
-            android:text="start app" />
+            android:text="start pkg" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="openActivityClick"
+            android:text="start activity" />
         
         <Button
             android:layout_width="0dp"

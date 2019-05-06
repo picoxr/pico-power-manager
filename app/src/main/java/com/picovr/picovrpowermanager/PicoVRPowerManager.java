@@ -136,7 +136,6 @@ public class PicoVRPowerManager {
     }
 
     public void goToApp(String packagename) {
-
         if (mContext.getPackageManager().getLaunchIntentForPackage(packagename) != null) {
             Intent intent = new Intent();
             PackageManager packageManager = mContext.getPackageManager();
@@ -150,13 +149,14 @@ public class PicoVRPowerManager {
     }
 
     public void goToActivity(String packagename, String activityname) {
-        Intent intent;
-        PackageManager packageManager = mContext.getPackageManager();
-        intent = packageManager.getLaunchIntentForPackage(packagename);
-        ComponentName comp = new ComponentName(packagename, activityname);
-        intent.setComponent(comp);
-        mContext.startActivity(intent);
-
+        if (mContext.getPackageManager().getLaunchIntentForPackage(packagename) != null) {
+            Intent intent = new Intent();
+            ComponentName comp = new ComponentName(packagename, activityname);
+            intent.setComponent(comp);
+            mContext.startActivity(intent);
+        } else {
+            Log.e(TAG, "goToApp: " + "The specific package doesn't exist!" );
+        }
     }
 
 
