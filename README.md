@@ -1,6 +1,6 @@
 # PowerManager 
-
-Note: Regarding JAR file creation and usage, please refer to [the Guideline](https://github.com/picoxr/support/blob/master/How%20to%20Use%20JAR%20file%20in%20Unity%20project%20on%20Pico%20device.docx)
+JAR, Demo APK and PicoUnityActivity.cs are in /resource.
+Note: If you want to create your own JAR file, please refer to [the Guideline](https://github.com/picoxr/support/blob/master/How%20to%20Use%20JAR%20file%20in%20Unity%20project%20on%20Pico%20device.docx)
 
 ## APK usage
 You need to place the test.apk in download directory for testing "silentInstall", "goToApp", "silentUninstall" APIs.
@@ -44,6 +44,7 @@ This JAR file is used to modify power settings
 | acquireWakeLock     | AcquireWakeLock                 | Must be paired with releaseWakeLock    |
 | releaseWakeLock     | ReleaseWakeLock                 | Must be paired with acquireWakeLock    |
 | goToApp             | Jump application                | Need to add the package name parameter |
+| goToActivity        | Jump application (Activity)     | Need to add the package name and activity name parameters |
 | setpropSleep        | Sets the system sleep timeout   | Need to increase the time parameter    |
 | setPropLockScreen   | Sets the screen closing timeout | Need to increase the time parameter    |
 | silentInstall       | SilentInstall                   | System signature required              |
