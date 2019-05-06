@@ -52,6 +52,6 @@ This JAR file is used to modify power settings
 The second parameter in the silent installation must be the package name of the current application, not the package name of the installed application.
 
 ## Note
-This demo requires system signature. About how to sign a apk, refer to this [Customize Launcher on Pico Device](https://github.com/picoxr/support/blob/master/Customize%20Launcher%20on%20Pico%20Device.docx?raw=true).
+This demo requires system signature. About how to sign a apk, refer to this [Customize Launcher on Pico Device](http://static.appstore.picovr.com/docs/KioskMode/chapter_four.html).
 
 
