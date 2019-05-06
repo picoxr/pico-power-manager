@@ -12,9 +12,10 @@ This JAR file is used to modify power settings
 
  Modify the androidminifests. XML file and Add: 
  
-     ```
+   
+   ```
      android: sharedUserId = "android. uid. system"
-     ```
+   ```
 
    Add Permission:
 
