@@ -14,7 +14,7 @@ This JAR file is used to modify power settings
  
    
    ```
-     android: sharedUserId = "android. uid. system"
+     android:sharedUserId = "android.uid.system"
    ```
 
    Add Permission:
