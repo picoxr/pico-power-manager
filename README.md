@@ -43,8 +43,8 @@ This JAR file is used to modify power settings
 | androidUnlockScreen | UnLockScreen                    |                                        |
 | acquireWakeLock     | AcquireWakeLock                 | Must be paired with releaseWakeLock    |
 | releaseWakeLock     | ReleaseWakeLock                 | Must be paired with acquireWakeLock    |
-| goToApp             | Jump application                | Need to add the package name parameter |
-| goToActivity        | Jump application (Activity)     | Need to add the package name and activity name parameters |
+| goToApp             | Start an application            | Need to add the package name parameter |
+| goToActivity        | Start an application (specify Activity)     | Need to add the package name and activity name parameters |
 | setpropSleep        | Sets the system sleep timeout   | Need to increase the time parameter    |
 | setPropLockScreen   | Sets the screen closing timeout | Need to increase the time parameter    |
 | silentInstall       | SilentInstall                   | System signature required              |
