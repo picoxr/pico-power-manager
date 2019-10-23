@@ -1,8 +1,31 @@
 # PowerManager 
 JAR, Demo APK and PicoUnityActivity.cs are in /resource.    
-Note:
-If you want to create your own JAR file, please refer to [the Guideline](http://static.appstore.picovr.com/docs/JarUnity/index.html)   
-You can use "com.picovr.picovrpowermanager.PicoVRPowerManager" class and refer to section 2 in the guideline above for invoking all interfaces except "androidLockScreen", refer to [here](http://static.appstore.picovr.com/docs/PowerManager/chapter_three.html) to use this interface.
+**Note**:
+If you want to create your own JAR file, please refer to [the Guideline](http://static.appstore.picovr.com/docs/JarUnity/index.html) 
+
+There are two class in JAR file."com.picovr.picovrpowermanager.PicoVRPowerManagerActivity" and "com.picovr.picovrpowermanager.PicoVRPowerManager".
+[This document](http://static.appstore.picovr.com/docs/PowerManager/chapter_three.html) introduced how to use the first one.
+For using second one you should refer to section 2 in the guideline above, it works for all interfaces except "androidLockScreen".
+
+Example code for using "com.picovr.picovrpowermanager.PicoVRPowerManager" class.
+
+```
+AndroidJavaObject ajo;
+AndroidJavaObject ActivityContext;
+void Start()
+    {
+        ajo = new AndroidJavaObject("com.picovr.picovrpowermanager.PicoVRPowerManager");
+        ActivityContext = new AndroidJavaClass("com.unity3d.player.UnityPlayer").GetStatic<AndroidJavaObject>("currentActivity");
+		     //Note that you need to invoke "init" method first for using all interfaces.
+        ajo.Call("init", ActivityContext);
+    }
+    public void androidShutDown()
+    {
+        Debug.Log("androidShutDown");
+        ajo.Call("androidShutDown");
+    }
+```
+
 
 ## APK usage
 You need to place the test.apk in download directory for testing "silentInstall".   
