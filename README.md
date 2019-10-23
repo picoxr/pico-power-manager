@@ -5,7 +5,7 @@ If you want to create your own JAR file, please refer to [the Guideline](http://
 
 There are two classes in JAR file, "com.picovr.picovrpowermanager.PicoVRPowerManagerActivity" and "com.picovr.picovrpowermanager.PicoVRPowerManager".
 
-To call "androidLockScreen" function, please use "com.picovr.picovrpowermanager.PicoVRPowerManagerActivity" class and follow the online instruction at [here](http://static.appstore.picovr.com/docs/PowerManager/chapter_three.html)
+To call "androidLockScreen" function, please use "com.picovr.picovrpowermanager.PicoVRPowerManagerActivity" class and follow the online instruction [here](http://static.appstore.picovr.com/docs/PowerManager/chapter_three.html)
 
 For other functions, it is recommended to use "com.picovr.picovrpowermanager.PicoVRPowerManager" class and refer to section 2 in [this guideline](http://static.appstore.picovr.com/docs/JarUnity/index.html)
 
