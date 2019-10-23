@@ -1,6 +1,8 @@
 # PowerManager 
 JAR, Demo APK and PicoUnityActivity.cs are in /resource.    
-Note: If you want to create your own JAR file, please refer to [the Guideline](http://static.appstore.picovr.com/docs/JarUnity/index.html)
+Note:
+If you want to create your own JAR file, please refer to [the Guideline](http://static.appstore.picovr.com/docs/JarUnity/index.html)   
+You can use "com.picovr.picovrpowermanager.PicoVRPowerManager" class and refer to section 2 in the guideline above for invoking all interfaces except "androidLockScreen", refer to [here](http://static.appstore.picovr.com/docs/PowerManager/chapter_three.html) to use this interface.
 
 ## APK usage
 You need to place the test.apk in download directory for testing "silentInstall".   
