@@ -3,7 +3,7 @@ JAR, Demo APK and PicoUnityActivity.cs are in /resource.
 **Note**:
 If you want to create your own JAR file, please refer to [the Guideline](http://static.appstore.picovr.com/docs/JarUnity/index.html) 
 
-There are two class in JAR file."com.picovr.picovrpowermanager.PicoVRPowerManagerActivity" and "com.picovr.picovrpowermanager.PicoVRPowerManager".
+There are two classes in JAR file."com.picovr.picovrpowermanager.PicoVRPowerManagerActivity" and "com.picovr.picovrpowermanager.PicoVRPowerManager".
 [This document](http://static.appstore.picovr.com/docs/PowerManager/chapter_three.html) introduced how to use the first one.
 For using second one you should refer to section 2 in the guideline above, it works for all interfaces except "androidLockScreen".
 
