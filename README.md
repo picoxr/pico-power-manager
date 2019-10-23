@@ -3,9 +3,11 @@ JAR, Demo APK and PicoUnityActivity.cs are in /resource.
 **Note**:
 If you want to create your own JAR file, please refer to [the Guideline](http://static.appstore.picovr.com/docs/JarUnity/index.html) 
 
-There are two classes in JAR file."com.picovr.picovrpowermanager.PicoVRPowerManagerActivity" and "com.picovr.picovrpowermanager.PicoVRPowerManager".
-[This document](http://static.appstore.picovr.com/docs/PowerManager/chapter_three.html) introduced how to use the first one.
-For using second one you should refer to section 2 in the guideline above, it works for all interfaces except "androidLockScreen".
+There are two classes in JAR file, "com.picovr.picovrpowermanager.PicoVRPowerManagerActivity" and "com.picovr.picovrpowermanager.PicoVRPowerManager".
+
+To call "androidLockScreen" function, please use "com.picovr.picovrpowermanager.PicoVRPowerManagerActivity" class and follow the online instruction at [here](http://static.appstore.picovr.com/docs/PowerManager/chapter_three.html)
+
+For other functions, it is recommended to use "com.picovr.picovrpowermanager.PicoVRPowerManager" class and refer to section 2 in [this guideline](http://static.appstore.picovr.com/docs/JarUnity/index.html)
 
 Example code for using "com.picovr.picovrpowermanager.PicoVRPowerManager" class.
 
@@ -16,7 +18,7 @@ void Start()
     {
         ajo = new AndroidJavaObject("com.picovr.picovrpowermanager.PicoVRPowerManager");
         ActivityContext = new AndroidJavaClass("com.unity3d.player.UnityPlayer").GetStatic<AndroidJavaObject>("currentActivity");
-		     //Note that you need to invoke "init" method first for using all interfaces.
+	//Ensure to invoke "init" function first before using all interfaces.
         ajo.Call("init", ActivityContext);
     }
     public void androidShutDown()
