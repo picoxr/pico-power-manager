@@ -211,17 +211,19 @@ public class PicoVRPowerManager {
                 @Override
                 public void onException(Exception arg0) {
                     // TODO Auto-generated method stub
-                    Log.e(TAG, "Enable silent installation，onException");
+                    Log.e(TAG, "silentInstall，onException: [" + arg0 + "]");
                 }
                 @Override
                 public void onError(String arg0) {
                     // TODO Auto-generated method stub
-                    Log.e(TAG, "Enable silent installation， onError");
+                    if(!arg0.equals("")) {
+                        Log.e(TAG, "silentInstall， onError : [" + arg0 + "]");
+                    }
                 }
                 @Override
                 public void onComplete(String arg0) {
                     // TODO Auto-generated method stub
-                    Log.e(TAG, "Enable silent installation，onComplete");
+                    Log.e(TAG, "silentInstall，onComplete : [" + arg0 + "]");
                 }
             });
         } else {
