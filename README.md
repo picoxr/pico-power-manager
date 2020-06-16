@@ -81,6 +81,6 @@ This JAR file is used to modify system-level settings
 The second parameter in the silent installation must be the package name of the current application, not the package name of the installed application.
 
 ## Note
-This demo requires system signature. About how to sign a apk, refer to this [KioskMode[4]](http://static.appstore.picovr.com/docs/KioskMode/chapter_four.html?_blank).
+This demo requires system signature. About how to sign a apk, refer to this [KioskMode[3]](http://static.appstore.picovr.com/docs/KioskMode/chapter_three.html).
 
 
